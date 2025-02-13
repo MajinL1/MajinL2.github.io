@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Confession 💖</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            overflow: hidden;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        #yes {
+            background-color: red;
+            color: white;
+        }
+        #no {
+            background-color: gray;
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+        /* Heart Animation */
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h4 id="question">MajinL send a message to YOU💕</h4>
+    <img id="loveGif" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWZjdTQ2aXU2bDd6NWpzYXdvaXl5bWZuMDBpeXd4b2VuczA1dGU0ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MApRfYSxNLANDujHOf/giphy.gif" width="200px" alt="Love GIF">
+    <h1 id="question">Will You Be My Valentine? 💕</h1>
+    
+    <div id="buttons">
+        <button id="yes" class="btn" onclick="acceptLove()">Yes</button>
+        <button id="no" class="btn" onclick="changeNo()">No</button>
+    </div>
+
+    <h2 id="message" class="hidden">YAAAYYYYYYYY! ❤️</h2>
+    
+    <!-- First Music (Before Clicking "Yes") -->
+    <audio id="bgMusic" src="https://od.lk/d/MjdfNjA2ODAzOThf/%283.92%20MB%29%20LeeHi%20-%20ONLY%20%282%29%20MP3%20Download%20-%20ilKPOP.cc.mp3" autoplay loop></audio>
+</div>
+
+<script>
+    let noMessages = [
+        "Please think about it...",
+        "Are you really sure?",
+        "Don't break my heart 🥺",
+        "I will be really sad 😭",
+        "You're my everything 💖",
+        "I can't imagine without you 💞",
+        "This is your last chance!! 😢"
+    ];
+    let noClickCount = 0;
+    let yesButton = document.getElementById("yes");
+
+    function changeNo() {
+        let noButton = document.getElementById("no");
+
+        if (noClickCount < noMessages.length) {
+            noButton.innerText = noMessages[noClickCount]; // Change text
+            noClickCount++;
+        } else {
+            noButton.remove(); // Remove "No" button after 7 clicks
+        }
+
+        // Make "Yes" button bigger
+        let newSize = parseInt(window.getComputedStyle(yesButton).fontSize) + 10;
+        yesButton.style.fontSize = newSize + "px";
+        yesButton.style.padding = (newSize / 2) + "px " + (newSize) + "px";
+
+        if (newSize > 100) {
+            yesButton.style.width = "100vw"; // Make it full width
+            yesButton.style.height = "100vh"; // Make it full height
+        }
+    }
+
+    function acceptLove() {
+        document.getElementById("message").classList.remove("hidden");
+        document.getElementById("question").innerText = "I LOVE UUUUUUUUUUU! ❤️";
+        
+        // Change the GIF when "Yes" is clicked
+        document.getElementById("loveGif").src = "https://media0.giphy.com/media/VDSiVnIACuazZNM9G3/giphy.gif";
+
+        // Hide the buttons
+        document.getElementById("buttons").style.display = "none";
+
+        // Change Music to Second Song
+        let music = document.getElementById("bgMusic");
+        music.src = "https://od.lk/d/MjdfNjA2ODA1NTBf/Denise%20Julia%20-%20NVMD%20%28Lyrics%29.mp3"; 
+        music.play();
+
+        for (let i = 0; i < 20; i++) {
+            createHeart();
+        }
+    }
+
+    function createHeart() {
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+        heart.style.animationDuration = Math.random() * 2 + 2 + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
+    }
+</script>
+
+<footer>
+    <p>&copy; <span id="year"></span> MajinL. All Rights Reserved.</p>
+</footer>
+
+<style>
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(243, 191, 222, 0.7);
+        color: rgb(12, 12, 12);
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+    }
+</style>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
